@@ -1,10 +1,10 @@
 // todo vísa í rétta hluti með import
 import {
-  empty, el, randomNumber, randomDate,
+  empty,
 } from './helpers';
 import getRandomImage from './nasa-api';
 import {
-  load, save, clear,
+  save,
 } from './storage';
 // breytur til þess að halda utan um html element nodes
 const title = document.querySelector('.apod__title'); // titill fyrir mynd á forsíðu
@@ -51,7 +51,7 @@ function saveCurrentImage() {
   if (image.media__type === 'image') {
     save(image.media_type, image.hdurl, image.explanation, image.title);
   } else {
-    save(image.media__type, image.url, image.explanation, image.title);
+    save(image.media_type, image.url, image.explanation, image.title);
   }
 }
 
@@ -59,16 +59,13 @@ function saveCurrentImage() {
  * Upphafsstillir forsíðuna. Setur event listeners á takkana, og sækir eina mynd.
  *
  */
-export default function init(apod) {
+export default function init() {
   getNewImage();
   const newImageButton = document.querySelector('#new-image-button');
   newImageButton.addEventListener('click', getNewImage);
 
   const saveImageButton = document.querySelector('#save-image-button');
   saveImageButton.addEventListener('click', saveCurrentImage);
-
-  const seeSaved = document.querySelector('.visited');
-  seeSaved.addEventListener('click', loadFavourites);
 }
 
 /*
@@ -76,5 +73,5 @@ export default function init(apod) {
  * titlum þeirra.
  */
 export function loadFavourites() {
-  console.log('asdf')
+
 }

@@ -72,6 +72,6 @@ export function randomDate() {
   }
 
   today = `${randomyyyy}-${randommm}-${randomdd}`;
-  console.log(today);
+
   return today;
 }

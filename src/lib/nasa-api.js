@@ -18,6 +18,6 @@ const URL = 'https://api.nasa.gov/planetary/apod?api_key=';
 export default async function getRandomImage() {
   const resp = await fetch(`${URL}${API_KEY}${randomDate()}`);
   const json = await resp.json();
-  console.log(json);
+
   return json;
 }
