@@ -48,6 +48,10 @@ main { /* stylelint-disable-line */
   flex: 2;
 }
 
+.notdisplayed{
+  display: none;
+}
+
 @import "text";
 @import "button";
 @import "apod";
