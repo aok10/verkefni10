@@ -40,38 +40,38 @@ export function randomNumber(min, max) {
 
 export function randomDate() {
   let today = new Date();
-  let dd = String(today.getDate()).padStart(2, '0');
-  let mm = String(today.getMonth() + 1).padStart(2, '0');
-  let yyyy = today.getFullYear();
-  
-  let randomyyyy = randomNumber(1995, yyyy);
-  let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  if ((randomyyyy%100!=0&&randomyyyy%4===0)||randomyyyy%400===0) {
-    months[1]=29;
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+
+  const randomyyyy = randomNumber(1995, yyyy);
+  const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if ((randomyyyy % 100 !== 0 && randomyyyy % 4 === 0) || randomyyyy % 400 === 0) {
+    months[1] = 29;
   }
 
   let randomdd;
   let randommm;
-  if (randomyyyy == 1995) {
+  if (randomyyyy === 1995) {
     randommm = randomNumber(6, 12);
     if (randommm === 6) {
-      randomdd = randomNumber(16, months[randommm-1]);
+      randomdd = randomNumber(16, months[randommm - 1]);
     } else {
-      randomdd = randomNumber(1, months[randommm-1]);
+      randomdd = randomNumber(1, months[randommm - 1]);
     }
-  } else if (randomyyyy == yyyy) {
+  } else if (randomyyyy === yyyy) {
     randommm = randomNumber(1, mm);
     if (randommm === mm) {
       randomdd = randomNumber(1, dd);
     } else {
-      randomdd = randomNumber(1, months[randommm-1]);
+      randomdd = randomNumber(1, months[randommm - 1]);
     }
   } else {
     randommm = randomNumber(1, 12);
-    randomdd = randomNumber(1, months[randommm-1]);
+    randomdd = randomNumber(1, months[randommm - 1]);
   }
 
-  today = randomyyyy + '-' + randommm + '-' + randomdd;
+  today = `${randomyyyy}-${randommm}-${randomdd}`;
   console.log(today);
   return today;
 }

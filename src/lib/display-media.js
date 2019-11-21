@@ -1,12 +1,16 @@
 // todo vísa í rétta hluti með import
-import { empty, el, randomNUmber, randomDate } from './helpers';
+import {
+  empty, el, randomNumber, randomDate,
+} from './helpers';
 import getRandomImage from './nasa-api';
-import { load, save, clear } from './storage';
+import {
+  load, save, clear,
+} from './storage';
 // breytur til þess að halda utan um html element nodes
-let title = document.querySelector('.apod__title'); // titill fyrir mynd á forsíðu
-let text = document.querySelector('.apod__text'); // texti fyrir mynd á forsíðu
-let img = document.querySelector('img'); // mynd á forsíðu
-let iframe = document.querySelector('iframe');
+const title = document.querySelector('.apod__title'); // titill fyrir mynd á forsíðu
+const text = document.querySelector('.apod__text'); // texti fyrir mynd á forsíðu
+const img = document.querySelector('img'); // mynd á forsíðu
+const iframe = document.querySelector('iframe');
 
 let image; // object sem inniheldur núverandi mynd á forsíðu.
 /*
@@ -14,37 +18,41 @@ let image; // object sem inniheldur núverandi mynd á forsíðu.
  * ásamt titli og texta.
  */
 async function getNewImage() {
-    getRandomImage().then((json) => {
-        image = json;
-        if (image.media_type==='image') {
-            img.setAttribute('src', image.hdurl);
-            if (img.classList.contains('notdisplayed')) {
-                img.classList.remove('notdisplayed');
-            }
-            if (!iframe.classList.contains('notdisplayed')) {
-                iframe.classList.add('notdisplayed');
-            }
-        } else {
-            iframe.setAttribute('src', image.url);
-            if (iframe.classList.contains('notdisplayed')) {
-                iframe.classList.remove('notdisplayed');
-            }
-            if (!img.classList.contains('notdisplayed')) {
-                img.classList.add('notdisplayed');
-            }
-        }
-        empty(text);
-        empty(title);
-        text.appendChild(document.createTextNode(image.explanation));
-        title.appendChild(document.createTextNode(image.title));
-    });
+  getRandomImage().then((json) => {
+    image = json;
+    if (image.media_type === 'image') {
+      img.setAttribute('src', image.hdurl);
+      if (img.classList.contains('notdisplayed')) {
+        img.classList.remove('notdisplayed');
+      }
+      if (!iframe.classList.contains('notdisplayed')) {
+        iframe.classList.add('notdisplayed');
+      }
+    } else {
+      iframe.setAttribute('src', image.url);
+      if (iframe.classList.contains('notdisplayed')) {
+        iframe.classList.remove('notdisplayed');
+      }
+      if (!img.classList.contains('notdisplayed')) {
+        img.classList.add('notdisplayed');
+      }
+    }
+    empty(text);
+    empty(title);
+    text.appendChild(document.createTextNode(image.explanation));
+    title.appendChild(document.createTextNode(image.title));
+  });
 }
 
 /*
  * Vistar núverandi mynd í storage.
  */
 function saveCurrentImage() {
-    console.log('save image');
+  if (image.media__type === 'image') {
+    save(image.media_type, image.hdurl, image.explanation, image.title);
+  } else {
+    save(image.media__type, image.url, image.explanation, image.title);
+  }
 }
 
 /*
@@ -52,12 +60,15 @@ function saveCurrentImage() {
  *
  */
 export default function init(apod) {
-    getNewImage();
-    const newImageButton = document.querySelector('#new-image-button');
-    newImageButton.addEventListener('click', getNewImage);
+  getNewImage();
+  const newImageButton = document.querySelector('#new-image-button');
+  newImageButton.addEventListener('click', getNewImage);
 
-    const saveImageButton = document.querySelector('#save-image-button');
-    saveImageButton.addEventListener('click', saveCurrentImage);
+  const saveImageButton = document.querySelector('#save-image-button');
+  saveImageButton.addEventListener('click', saveCurrentImage);
+
+  const seeSaved = document.querySelector('.visited');
+  seeSaved.addEventListener('click', loadFavourites);
 }
 
 /*
@@ -65,5 +76,5 @@ export default function init(apod) {
  * titlum þeirra.
  */
 export function loadFavourites() {
-
+  console.log('asdf')
 }
